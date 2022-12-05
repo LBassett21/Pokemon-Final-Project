@@ -78,7 +78,7 @@ using std::string;
 #define	MAGIKARP	73
 #define	GYRADOS		74
 #define	LAPRAS		75
-#define	DITO		76
+#define	DITTO		76
 #define	EEVEE		77
 #define	VAPOREON	78
 #define	JOLTEON		79
@@ -114,7 +114,7 @@ struct poke_names {
 		"MAROWAK", "RYHORN", "RHYDON", "TANGELA", "HORSEA",
 		"SEADRA", "GOLDEEN", "SEAKING", "STARYU", "STARMIE",
 		"ELECTRABUZZ", "MAGMAR", "MAGIKARP", "GYRADOS", "LAPRAS",
-		"DITO", "EEVEE", "VAPOREON", "JOLTEON", "FLAREON",
+		"DITTO", "EEVEE", "VAPOREON", "JOLTEON", "FLAREON",
 		"OMANYTE", "OMASTAR", "KABUTO", "KABUTOPS", "SNORLAX"
 	};
 };
