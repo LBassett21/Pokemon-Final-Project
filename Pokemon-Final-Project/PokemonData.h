@@ -127,5 +127,5 @@ struct {
 	};
 	int damage[14] = { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// Damage per move
 	int pp[14] =	 { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// PP cost per move
-	int type[14] = NORMAL, NORMAL, NORMAL, NORMAL, WATER, WATER, FIRE, FIRE, GRASS, GRASS, GROUND, GROUND, ELECTRIC, ELECTRIC;
+	int type[14] =	 { NORMAL, NORMAL, NORMAL, NORMAL, WATER, WATER, FIRE, FIRE, GRASS, GRASS, GROUND, GROUND, ELECTRIC, ELECTRIC };
 } poke_moves;
