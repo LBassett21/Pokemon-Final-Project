@@ -11,7 +11,7 @@ class Trainer :
 	Pokemon* party;		// Array of all Pokemon in Trainer's party
 
 public:
-	Trainer(string in_name, Pokemon p1, Pokemon p2, Pokemon p3);
+	Trainer(string in_name, int num_p, int num_e, int num_r, Pokemon p1, Pokemon p2, Pokemon p3);
 
 	string show_name();
 	int show_potion();

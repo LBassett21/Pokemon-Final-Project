@@ -92,12 +92,13 @@ using std::string;
 // Pokemon Types
 #define	NORMAL		1
 #define	WATER		2
-#define	GROUND		3
-#define	FIRE		4
-#define	ELECTRIC	5
+#define GRASS		3
+#define	GROUND		4
+#define	FIRE		5
+#define	ELECTRIC	6
 
 // Pokemon string names
-struct poke_names {
+struct {
 	string names[85] = {
 		"BULBASAUR", "IVYSAUR", "VENUSAUR", "CHARMANDER", "CHARMELEON",
 		"CHARIZARD", "SQUIRTLE", "WARTORTLE", "BLASTOISE", "PIDGEY",
@@ -117,5 +118,14 @@ struct poke_names {
 		"DITTO", "EEVEE", "VAPOREON", "JOLTEON", "FLAREON",
 		"OMANYTE", "OMASTAR", "KABUTO", "KABUTOPS", "SNORLAX"
 	};
-};
+} poke_names; 
 
+struct {
+	string move_names[14] = {
+		"QUICK ATTACK", "TACKLE", "MEGA KICK", "FURY ATTACK", "HYDRO PUMP", "BUBBLE BEAM", "FLAMETHROWER", "FIRE SPIN",
+		"RAZOR LEAF", "VINE WHIP", "EARTHQUAKE", "DIG", "THUNDER PUNCH", "THUNDERBOLT"
+	};
+	int damage[14] = { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// Damage per move
+	int pp[14] =	 { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// PP cost per move
+	int type[14] =	 { NORMAL, NORMAL, NORMAL, NORMAL, WATER, WATER, FIRE, FIRE, GRASS, GRASS, GROUND, GROUND, ELECTRIC, ELECTRIC };
+} poke_moves;
