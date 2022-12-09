@@ -9,11 +9,10 @@ class Pokemon
 	int hp;
 	int pp;
 	int type;
-
-	// Make separate class for "moves"?
+	int moves[4];
 
 public:
-	Pokemon(int in_name, int in_hp, int in_pp);
+	Pokemon(int in_name, int in_hp, int in_pp, int move1, int move2, int move3, int move4);
 
 	string show_name(int in_name);
 	int show_hp();
