@@ -5,7 +5,7 @@ using std::string;
 
 class Pokemon
 {
-	//int name;
+	int name;
 	int hp;
 	int pp;
 	int type;

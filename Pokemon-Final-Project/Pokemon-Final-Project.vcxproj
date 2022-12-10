@@ -139,13 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\source\repos\Pokemon-Final-Project\Pokemon-Final-Project\Moves.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pokemon.cpp" />
     <ClCompile Include="Trainer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\source\repos\Pokemon-Final-Project\Pokemon-Final-Project\Moves.h" />
     <ClInclude Include="..\..\..\..\..\..\source\repos\Pokemon-Final-Project\Pokemon-Final-Project\PokemonData.h" />
     <ClInclude Include="Pokemon.h" />
     <ClInclude Include="Trainer.h" />

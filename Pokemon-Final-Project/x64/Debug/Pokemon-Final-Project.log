@@ -1,2 +1,3 @@
 ﻿  main.cpp
+C:\Users\Bassettl\Documents\WIT\2022\OOP\Pokemon-Final-Project\Pokemon-Final-Project\main.cpp(153,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Pokemon-Final-Project.vcxproj -> C:\Users\Bassettl\Documents\WIT\2022\OOP\Pokemon-Final-Project\x64\Debug\Pokemon-Final-Project.exe
