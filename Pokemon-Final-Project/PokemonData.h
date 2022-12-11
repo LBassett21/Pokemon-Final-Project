@@ -3,91 +3,91 @@
 using std::string;
 
 // Pokemon Define names
-#define	BULBASAUR	1
-#define	IVYSAUR		2
-#define	VENUSAUR	3
-#define	CHARMANDER	4
-#define	CHARMELEON	5
-#define	CHARIZARD	6
-#define	SQUIRTLE	7
-#define	WARTORTLE	8
-#define	BLASTOISE	9
-#define	PIDGEY		10
-#define	PIDGEOTTO	11
-#define	PIDGEOT		12
-#define	RATTATA		13
-#define	RATICATE	14
-#define	SPEAROW		15
-#define	FEAROW		16
-#define	PIKACHU		17
-#define	RAICHU		18
-#define	VULPIX		19
-#define	NINETAILS	20
-#define	ODDISH		21
-#define	GLOOM		22
-#define	VILEPLUME	23
-#define	PARAS		24
-#define	PARASECT	25
-#define	MEOWTH		26
-#define	PERSIAN		27
-#define	PSYDUCK		28
-#define	GOLDUCK		29
-#define	GROWLITHE	30
-#define	ARCANINE	31
-#define	POLIWAG		32
-#define	POLIWHIRL	33
-#define	POLIWRATH	34
-#define	BELLSPROUT	35
-#define	WEEPINBELL	36
-#define	VICTREEBELL	37
-#define	TENTACOOL	38
-#define	TENTACRUEL	39
-#define	GEODUDE		40
-#define	GRAVLER		41
-#define	GOLEM		42
-#define	PONYTA		43
-#define	RAPIDASH	44
-#define	SLOWPOKE	45
-#define	SLOWBRO		46
-#define	MAGNEMITE	47
-#define	MAGNETON	48
-#define	DODUO		49
-#define	DODRIO		50
-#define	SEEL		51
-#define	DEWGONG		52
-#define	SHELLDER	53
-#define	CLOYSTER	54
-#define	ONIX		55
-#define	KRABBY		56
-#define	KINGLER		57
-#define	EXEGGCUTE	58
-#define	EXEGGUTOR	59
-#define	CUBONE		60
-#define	MAROWAK		61
-#define	RYHORN		62
-#define	RHYDON		63
-#define	TANGELA		64
-#define	HORSEA		65
-#define	SEADRA		66
-#define	GOLDEEN		67
-#define	SEAKING		68
-#define	STARYU		69
-#define	STARMIE		70
-#define	ELECTRABUZZ	71
-#define	MAGMAR		72
-#define	MAGIKARP	73
-#define	GYRADOS		74
-#define	LAPRAS		75
-#define	DITTO		76
-#define	EEVEE		77
-#define	VAPOREON	78
-#define	JOLTEON		79
-#define	FLAREON		80
-#define	OMANYTE		81
-#define	OMASTAR		82
-#define	KABUTO		83
-#define	KABUTOPS	84
-#define	SNORLAX		85
+#define	BULBASAUR	0
+#define	IVYSAUR		1
+#define	VENUSAUR	2
+#define	CHARMANDER	3
+#define	CHARMELEON	4
+#define	CHARIZARD	5
+#define	SQUIRTLE	6
+#define	WARTORTLE	7
+#define	BLASTOISE	8
+#define	PIDGEY		9
+#define	PIDGEOTTO	10
+#define	PIDGEOT		11
+#define	RATTATA		12
+#define	RATICATE	13
+#define	SPEAROW		14
+#define	FEAROW		15
+#define	PIKACHU		16
+#define	RAICHU		17
+#define	VULPIX		18
+#define	NINETAILS	19
+#define	ODDISH		20
+#define	GLOOM		21
+#define	VILEPLUME	22
+#define	PARAS		23
+#define	PARASECT	24
+#define	MEOWTH		25
+#define	PERSIAN		26
+#define	PSYDUCK		27
+#define	GOLDUCK		28
+#define	GROWLITHE	29
+#define	ARCANINE	30
+#define	POLIWAG		31
+#define	POLIWHIRL	32
+#define	POLIWRATH	33
+#define	BELLSPROUT	34
+#define	WEEPINBELL	35
+#define	VICTREEBELL	36
+#define	TENTACOOL	37
+#define	TENTACRUEL	38
+#define	GEODUDE		39
+#define	GRAVLER		40
+#define	GOLEM		41
+#define	PONYTA		42
+#define	RAPIDASH	43
+#define	SLOWPOKE	44
+#define	SLOWBRO		45
+#define	MAGNEMITE	46
+#define	MAGNETON	47
+#define	DODUO		48
+#define	DODRIO		49
+#define	SEEL		50
+#define	DEWGONG		51
+#define	SHELLDER	52
+#define	CLOYSTER	53
+#define	ONIX		54
+#define	KRABBY		55
+#define	KINGLER		56
+#define	EXEGGCUTE	57
+#define	EXEGGUTOR	58
+#define	CUBONE		59
+#define	MAROWAK		60
+#define	RYHORN		61
+#define	RHYDON		62
+#define	TANGELA		63
+#define	HORSEA		64
+#define	SEADRA		65
+#define	GOLDEEN		66
+#define	SEAKING		67
+#define	STARYU		68
+#define	STARMIE		69
+#define	ELECTRABUZZ	70
+#define	MAGMAR		71
+#define	MAGIKARP	72
+#define	GYRADOS		73
+#define	LAPRAS		74
+#define	DITTO		75
+#define	EEVEE		76
+#define	VAPOREON	77
+#define	JOLTEON		78
+#define	FLAREON		79
+#define	OMANYTE		80
+#define	OMASTAR		81
+#define	KABUTO		82
+#define	KABUTOPS	83
+#define	SNORLAX		84
 
 // Pokemon Types
 #define	NORMAL		1
@@ -118,14 +118,30 @@ struct {
 		"DITTO", "EEVEE", "VAPOREON", "JOLTEON", "FLAREON",
 		"OMANYTE", "OMASTAR", "KABUTO", "KABUTOPS", "SNORLAX"
 	};
-} poke_names; 
-
-struct {
-	string move_names[14] = {
-		"QUICK ATTACK", "TACKLE", "MEGA KICK", "FURY ATTACK", "HYDRO PUMP", "BUBBLE BEAM", "FLAMETHROWER", "FIRE SPIN",
-		"RAZOR LEAF", "VINE WHIP", "EARTHQUAKE", "DIG", "THUNDER PUNCH", "THUNDERBOLT"
+	
+	int poke_type[85] = { GRASS, GRASS, GRASS, FIRE, FIRE,
+		FIRE, WATER, WATER, WATER, NORMAL,
+		NORMAL, NORMAL, NORMAL, NORMAL, NORMAL,
+		NORMAL, ELECTRIC, ELECTRIC, FIRE, FIRE,
+		GRASS, GRASS, GRASS, GRASS, GRASS,
+		NORMAL, NORMAL, WATER, WATER, FIRE,
+		FIRE, WATER, WATER, WATER, GRASS,
+		GRASS, GRASS, WATER, WATER, GROUND,
+		GROUND, GROUND, FIRE, FIRE, WATER,
+		WATER, ELECTRIC, ELECTRIC, NORMAL, NORMAL,
+		WATER, WATER, WATER, WATER, GROUND,
+		WATER, WATER, GRASS, GRASS, GROUND,
+		GROUND, GROUND, GROUND, GRASS, WATER,
+		WATER, WATER, WATER, WATER, WATER,
+		ELECTRIC, FIRE, WATER, WATER, WATER,
+		NORMAL, NORMAL, WATER, ELECTRIC, FIRE,
+		WATER, WATER, WATER, WATER, NORMAL
 	};
-	int damage[14] = { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// Damage per move
-	int pp[14] =	 { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// PP cost per move
-	int type[14] =	 { NORMAL, NORMAL, NORMAL, NORMAL, WATER, WATER, FIRE, FIRE, GRASS, GRASS, GROUND, GROUND, ELECTRIC, ELECTRIC };
-} poke_moves;
+	string move_names[14] = {
+		"HYDRO PUMP", "BUBBLE BEAM", "FLAMETHROWER", "FIRE SPIN", "RAZOR LEAF", "VINE WHIP", "EARTHQUAKE", 
+		"DIG", "THUNDER PUNCH", "THUNDERBOLT", "QUICK ATTACK", "TACKLE", "MEGA KICK", "FURY ATTACK"
+	};
+	int move_damage[14] = { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// Damage per move
+	int move_pp[14] = { 10, 10, 20, 20, 30, 35, 40, 50, 35, 40, 60, 50, 35, 40 };	// PP cost per move
+	int move_type[14] = { WATER, WATER, FIRE, FIRE, GRASS, GRASS, GROUND, GROUND, ELECTRIC, ELECTRIC, NORMAL, NORMAL, NORMAL, NORMAL};
+} poke_data; 
