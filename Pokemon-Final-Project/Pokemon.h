@@ -19,7 +19,7 @@ class Pokemon
 
 public:
 	Pokemon();
-	Pokemon(int in_name, int in_hp, int in_pp, int type, int poke_moves[4]);
+	Pokemon(int in_name, int in_hp, int in_pp, int type, int move1, int move2, int move3, int move4);
 
 	string show_name();
 

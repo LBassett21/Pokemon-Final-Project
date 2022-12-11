@@ -1,6 +1,1 @@
-﻿  Pokemon.cpp
-  main.cpp
-C:\Users\apostlem\Documents\Fall 2022\Object Oriented Programming\Pokemon-Final-Project\Pokemon-Final-Project\Pokemon-Final-Project\main.cpp(83,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
-C:\Users\apostlem\Documents\Fall 2022\Object Oriented Programming\Pokemon-Final-Project\Pokemon-Final-Project\Pokemon-Final-Project\main.cpp(36): warning C4172: returning address of local variable or temporary: poke_moves
-  Pokemon-Final-Project.vcxproj -> C:\Users\apostlem\Documents\Fall 2022\Object Oriented Programming\Pokemon-Final-Project\Pokemon-Final-Project\x64\Debug\Pokemon-Final-Project.exe
+﻿  Pokemon-Final-Project.vcxproj -> C:\Users\apostlem\Documents\Fall 2022\Object Oriented Programming\Pokemon-Final-Project\Pokemon-Final-Project\x64\Debug\Pokemon-Final-Project.exe

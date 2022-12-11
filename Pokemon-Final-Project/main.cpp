@@ -19,29 +19,30 @@ using std::ifstream;
 using std::endl;
 using std::vector;
 
-int* generate_moves(int pokemon) {
-	int poke_moves[4];
-	int moveslot = 0;
+int generate_move(int pokemon, int move1, int move2, int move3) {
+	int move;
 
 	// Pick moves based on type
 	for (int i = 0; i < sizeof(poke_data.move_type) / sizeof(poke_data.move_type[0]); i++) {
-		if ((poke_data.move_type[i] == poke_data.poke_type[pokemon]) || poke_data.move_type[i] == NORMAL) {	// If move type matches pokemon type (or is normal type move)
-			poke_moves[moveslot] = i;
-			moveslot++;
-		}
-		if (moveslot == 4)
+		// If move type matches pokemon type (or is normal type move), also check if not the same move as existing moves
+		if ((i != move1 && i != move2 && i != move3) && ((poke_data.move_type[i] == poke_data.poke_type[pokemon]) || poke_data.move_type[i] == NORMAL)) {	
+			move = i;	
 			break;
+		}
 	}
-	int* moves = poke_moves;
-	return moves;
+	return move;
 }
 
 Pokemon* generate_pokemon() {
 	int randPokemon = rand() % 85;			// Random Pokemon from 0-84
 	int randHP = (rand() % 70) + 80;		// Random HP from 80-150 
 	int randPP = (rand() % 60) + 60;		// Random PP from 60-120
-	int* poke_moves = generate_moves(randPokemon);
-	Pokemon* pokemon = new Pokemon(randPokemon, randHP, randPP, poke_data.poke_type[randPokemon], poke_moves);
+
+	int moves[4] = {-1,-1,-1,-1};
+	for (int i = 0; i < 4; i++) {
+		moves[i] = generate_move(randPokemon, moves[0], moves[1], moves[2]);
+	}
+	Pokemon* pokemon = new Pokemon(randPokemon, randHP, randPP, poke_data.poke_type[randPokemon], moves[0], moves[1], moves[2], moves[3]);
 	return pokemon;
 }
 
@@ -57,8 +58,8 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 	cout << opponent.show_name() << " sent out " << opponent.show_active_pokemon().show_name() << "!" << endl;
 	cout << "You sent out " << user.show_active_pokemon().show_name() << "!" << endl;
 	do {
-		cout << opponent.show_active_pokemon().show_name() << " - " << "HP: " << opponent.show_active_pokemon().show_hp() << "PP: " << opponent.show_active_pokemon().show_pp() << endl;
-		cout << user.show_active_pokemon().show_name() << " - " << "HP: " << user.show_active_pokemon().show_hp() << "PP: " << user.show_active_pokemon().show_pp() << endl;
+		cout << opponent.show_active_pokemon().show_name() << " - " << "HP: " << opponent.show_active_pokemon().show_hp() << " PP: " << opponent.show_active_pokemon().show_pp() << endl;
+		cout << user.show_active_pokemon().show_name() << " - " << "HP: " << user.show_active_pokemon().show_hp() << " PP: " << user.show_active_pokemon().show_pp() << endl;
 
 		cout << "What will you do?" << endl;
 		cout << "1. Fight\n" << "2. Bag\n" << "3. Pokemon\n";
@@ -194,8 +195,19 @@ int main() {
 
 	// Initalize Pokemon & Trainers
 	Pokemon* userPokemon[3];
+	int moves[4] = { -1,-1,-1,-1 };
+
+	// Create 3 user Pokemon
 	for (int i = 0; i < 3; i++) {
-		userPokemon[i] = new Pokemon(pokeChoices[i], 80, 100, pokeChoices[i], generate_moves(pokeChoices[i]));		// All user Pokemon have 80 HP and 100 PP
+		// Create 4 moves
+		for (int j = 0; j < 4; j++) {
+			moves[j] = generate_move(pokeChoices[i], moves[0], moves[1], moves[2]);
+		}
+		userPokemon[i] = new Pokemon(pokeChoices[i], 80, 100, pokeChoices[i], moves[0], moves[1], moves[2], moves[3]);		// All user Pokemon have 80 HP and 100 PP
+		// Reset move array to -1
+		for (int k = 0; k < 4; k++) {
+			moves[k] = -1;
+		}
 	}
 	User* user = new User(username, 1000, 0, 0, 0, 0, *userPokemon[0], *userPokemon[1], *userPokemon[2]);
 

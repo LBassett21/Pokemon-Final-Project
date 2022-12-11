@@ -5,7 +5,7 @@ Pokemon::Pokemon() {
 
 }
 
-Pokemon::Pokemon(int in_name, int in_hp, int in_pp, int in_type, int poke_moves[4]) {
+Pokemon::Pokemon(int in_name, int in_hp, int in_pp, int in_type, int move1, int move2, int move3, int move4) {
 	name = in_name;
 	type = in_type;
 	hp = in_hp;
@@ -14,9 +14,10 @@ Pokemon::Pokemon(int in_name, int in_hp, int in_pp, int in_type, int poke_moves[
 	max_hp = in_hp;
 	max_pp = in_pp;
 	
-	for (int i = 0; i < 4; i++) {
-		moves[i] = poke_moves[i];
-	}
+	moves[0] = move1;
+	moves[1] = move2;
+	moves[2] = move3;
+	moves[3] = move4;
 }
 
 string Pokemon::show_name() {

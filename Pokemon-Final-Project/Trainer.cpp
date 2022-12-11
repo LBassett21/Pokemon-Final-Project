@@ -12,6 +12,7 @@ Trainer::Trainer(string in_name, int num_p, int num_e, int num_r, Pokemon& p1, P
 	party[0] = p1;
 	party[1] = p2;
 	party[2] = p3;
+	active_pokemon = p1;
 }
 
 string Trainer::show_name() {

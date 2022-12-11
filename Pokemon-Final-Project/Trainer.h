@@ -8,7 +8,7 @@ class Trainer
 	int num_elixir;
 	int num_revive;
 	Pokemon party[3];						// Array of all Pokemon in Trainer's party
-	Pokemon active_pokemon = party[0];		// Current pokemon selected (default = 0)
+	Pokemon active_pokemon;					// Current pokemon selected (default = 0)
 
 	friend class User;
 
