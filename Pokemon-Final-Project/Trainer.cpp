@@ -116,10 +116,10 @@ void Trainer::use_revive(int party_member) {
 
 void Trainer::print_moves() {
 	cout << "Moves:" << endl
-		<< "1. " << active_pokemon.move_name[0] << " (PP: " << active_pokemon.move_pp[0] << ")\n"
-		<< "2. " << active_pokemon.move_name[1] << " (PP: " << active_pokemon.move_pp[1] << ")\n"
-		<< "3. " << active_pokemon.move_name[2] << " (PP: " << active_pokemon.move_pp[2] << ")\n"
-		<< "4. " << active_pokemon.move_name[3] << " (PP: " << active_pokemon.move_pp[3] << ")\n";
+		<< "1. " << active_pokemon.move_name[0] << " (PP: " << active_pokemon.move_pp[0] << ")" << " (DMG: " << active_pokemon.move_dmg[0] << ")\n"
+		<< "2. " << active_pokemon.move_name[1] << " (PP: " << active_pokemon.move_pp[1] << ")" << " (DMG: " << active_pokemon.move_dmg[1] << ")\n"
+		<< "3. " << active_pokemon.move_name[2] << " (PP: " << active_pokemon.move_pp[2] << ")" << " (DMG: " << active_pokemon.move_dmg[2] << ")\n"
+		<< "4. " << active_pokemon.move_name[3] << " (PP: " << active_pokemon.move_pp[3] << ")" << " (DMG: " << active_pokemon.move_dmg[3] << ")\n";
 }
 
 void Trainer::use_move(int move, Pokemon& enemy) {
