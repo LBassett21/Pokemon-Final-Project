@@ -1,5 +1,6 @@
 #pragma once
 #include "Pokemon.h"
+#include "PokemonData.h"
 
 class Trainer
 {
@@ -8,7 +9,7 @@ class Trainer
 	int num_elixir;
 	int num_revive;
 	Pokemon party[3];						// Array of all Pokemon in Trainer's party
-	Pokemon active_pokemon = party[0];		// Current pokemon selected (default = 0)
+	Pokemon active_pokemon;					// Current pokemon selected (default = 0)
 
 	friend class User;
 
@@ -20,6 +21,7 @@ public:
 	int show_potion();
 	int show_elixir();
 	int show_revive();
+<<<<<<< HEAD
 	string show_pokemon(int in_num);
 	int show_pokemon_type(int in_num);
 	int show_pokemon_hp(int in_num);
@@ -35,8 +37,16 @@ public:
 
 	void new_pokemon(int party_member, Pokemon& pNew);
 
+=======
+>>>>>>> 929d071f96a1fdabc1f1535ba669294ea48f3b93
 	Pokemon show_active_pokemon();
-	//virtual void use_move();
+	
+	// Battle methods
+	void print_moves();
+	void use_move(int move, Pokemon& enemy);
+	void use_potion(int party_member);
+	void use_elixir(int party_member);
+	void use_revive(int party_member);
 	// 
 	//virtual void switch_active_pokemon();
 };

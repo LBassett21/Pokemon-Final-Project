@@ -12,6 +12,8 @@ User::User(string in_name, float in_bal, int num_pb, int num_p, int num_e, int n
 	party[0] = p1;
 	party[1] = p2;
 	party[2] = p3;
+
+	active_pokemon = p1;
 }
 
 int User::show_pokeball() {

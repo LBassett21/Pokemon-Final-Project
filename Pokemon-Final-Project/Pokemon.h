@@ -9,7 +9,14 @@ class Pokemon
 	int hp;
 	int pp;
 	int type;
+	int weak_type;
+	int strong_type;
+
 	int moves[4];
+	string move_name[4];
+	int move_dmg[4];
+	int move_pp[4];
+	int move_type[4];
 
 	int max_hp;
 	int max_pp;
@@ -19,7 +26,7 @@ class Pokemon
 
 public:
 	Pokemon();
-	Pokemon(int in_name, int in_hp, int in_pp, int type, int poke_moves[4]);
+	Pokemon(int in_name, int in_hp, int in_pp, int type, int move1, int move2, int move3, int move4);
 
 	string show_name();
 
@@ -27,10 +34,7 @@ public:
 	int show_pp();
 	int show_type();
 
-	int show_move1();
-	int show_move2();
-	int show_move3();
-	int show_move4();
+	int show_move(int move_num);
 
 };
 
