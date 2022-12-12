@@ -21,7 +21,13 @@ public:
 	int show_potion();
 	int show_elixir();
 	int show_revive();
-<<<<<<< HEAD
+	Pokemon show_active_pokemon();
+	
+	// Battle methods
+	void print_moves();
+	void use_move(int move, Pokemon& enemy);
+	void use_potion(int party_member);
+	void use_elixir(int party_member);
 	string show_pokemon(int in_num);
 	int show_pokemon_type(int in_num);
 	int show_pokemon_hp(int in_num);
@@ -37,16 +43,8 @@ public:
 
 	void new_pokemon(int party_member, Pokemon& pNew);
 
-=======
->>>>>>> 929d071f96a1fdabc1f1535ba669294ea48f3b93
 	Pokemon show_active_pokemon();
-	
-	// Battle methods
-	void print_moves();
-	void use_move(int move, Pokemon& enemy);
-	void use_potion(int party_member);
-	void use_elixir(int party_member);
-	void use_revive(int party_member);
+	//virtual void use_move();
 	// 
 	//virtual void switch_active_pokemon();
 };

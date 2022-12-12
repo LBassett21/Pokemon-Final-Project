@@ -34,7 +34,6 @@ int Trainer::show_revive() {
 	return num_revive;
 }
 
-<<<<<<< HEAD
 string Trainer::show_pokemon(int in_num) {
 	return party[in_num].show_name();
 }
@@ -51,10 +50,10 @@ int Trainer::show_pokemon_pp(int in_num) {
 
 void Trainer::new_pokemon(int party_member, Pokemon& pNew) {
 	party[party_member] = pNew;
-=======
+}
+
 Pokemon Trainer::show_active_pokemon() {
 	return active_pokemon;
->>>>>>> 929d071f96a1fdabc1f1535ba669294ea48f3b93
 }
 
 // TODO: create methods for using moves / other menu options
