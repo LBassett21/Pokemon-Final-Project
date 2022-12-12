@@ -87,9 +87,10 @@ int main() {
 	bool pickedPokemon = false;
 	vector <int> pokeChoices;
 	bool check = false;
-	float bal = 1000; // delete this later
 	string username;
 	string rivalname;
+	bool checkArr[3] = { false, false, false };
+	string typeString;
 
 	Pokemon* randPokemon;
 	int chance = 0;
@@ -153,8 +154,10 @@ int main() {
 			pickedPokemon = true;
 			break;
 		case 5:
-			// ADD POKEMON DESCRIPTIONS
-			cout << "WIP\n";
+			cout << "Bulbasaur: \n Type: Grass \n Description: There is a plant seed on its back right from the day this Pokemon is born. The seed slowly grows larger.\n";
+			cout << "Charmander: \n Type: Fire \n Description: It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail.\n";
+			cout << "Pikachu: \n Type: Electric \n Description: Pikachu that can generate powerful electricity have cheek sacs that are extra soft and super stretchy.\n";
+			cout << "Squirtle: \n Type: Water \n Description: When it retracts its long neck into its shell, it squirts out water with vigorous force.\n";
 			break;
 		default:
 			cout << "Invalid input! Please try again!\n";
@@ -216,57 +219,59 @@ int main() {
 		cout << "1. Go to the Mart\n";
 		cout << "2. Battle other trainers\n";
 		cout << "3. Catch a pokemon\n";
+		cout << "4. Show your party\n";
 		cin >> userinput;
 
-		// TODO: Shift balance editing over to User class
+		// Enter mart
 		if (userinput == 1) {
 			cout << "Hi there! How can I help you?\n";
 			while (1) {
 				cout << "Current balance: $" << user->show_balance() << "\n";
 				cout << "1. Poke Ball - $200 - Current Supply: " << user->show_pokeball() << "\n";
 				cout << "2. Potion - $100 - Current Supply: " << user->show_potion() << "\n";
-				cout << "3. Elixer - $150 - Current Supply: " << user->show_elixir() << "\n";
+				cout << "3. Elixir - $150 - Current Supply: " << user->show_elixir() << "\n";
 				cout << "4. Revive - $300 - Current Supply: " << user->show_revive() << "\n";
 				cout << "5. Exit\n";
 				cin >> userinput;
+				cout << "How many would you like to buy?\n";
 				if (userinput == 1) {
-					if (bal < 200) {
+					cin >> userinput;
+					if (user->show_balance() < (200 * userinput)) {
 						cout << "You don't have enough money!\n";
 					}
 					else {
-						cout << "You purchased a Poke Ball\n";
-						bal = bal - 200;
-						user->buy_pokeball();
+						cout << "You purchased " << userinput << " Poke Ball(s)\n";
+						user->buy_pokeball(userinput);
 					}
 				}
 				else if (userinput == 2) {
-					if (bal < 100) {
+					cin >> userinput;
+					if (user->show_balance() < (100 * userinput)) {
 						cout << "You don't have enough money!\n";
 					}
 					else {
-						cout << "You purchased a Potion\n";
-						bal = bal - 100;
-						user->buy_potion();
+						cout << "You purchased " << userinput << " Potion(s)\n";
+						user->buy_potion(userinput);
 					}
 				}
 				else if (userinput == 3) {
-					if (bal < 150) {
+					cin >> userinput;
+					if (user->show_balance() < (150 * userinput)) {
 						cout << "You don't have enough money!\n";
 					}
 					else {
-						cout << "You purchased an elixer\n";
-						bal = bal - 150;
-						user->buy_elixir();
+						cout << "You purchased " << userinput << " Elixir(s)\n";
+						user->buy_elixir(userinput);
 					}
 				}
 				else if (userinput == 4) {
-					if (bal < 300) {
+					cin >> userinput;
+					if (user->show_balance() < (300 * userinput)) {
 						cout << "You don't have enough money!\n";
 					}
 					else {
-						cout << "You purchased a revive\n";
-						bal = bal - 300;
-						user->buy_revive();
+						cout << "You purchased " << userinput << " revive(s)\n";
+						user->buy_revive(userinput);
 					}
 				}
 				else if (userinput == 5) {
@@ -280,6 +285,7 @@ int main() {
 			}
 		}
 
+		// enter battle
 		else if (userinput == 2) {
 			switch (level) {
 			case 1:
@@ -299,12 +305,25 @@ int main() {
 			}
 			else
 				level++;
-
 		}
 
+		// Catch a new pokemon
 		else if (userinput == 3) {
 			if (user->show_pokeball() > 0) {
 				randPokemon = generate_pokemon();
+				do {
+					for (int i = 0; i < 3; i++) {
+						checkArr[i] = false;
+						if(randPokemon->show_name() == user->show_pokemon(i)) {
+							randPokemon = generate_pokemon();
+						}
+					}
+					for (int i = 0; i < 3; i++) {
+						if (randPokemon->show_name() != user->show_pokemon(i)) {
+							checkArr[i] = true;
+						}
+					}
+				} while (checkArr[0] == false || checkArr[1] == false || checkArr[2] == false);
 				while (1) {
 					cout << "You encountered a " << randPokemon->show_name() << "!\n";
 					cout << "Would you like the chance to catch it?\n";
@@ -320,9 +339,25 @@ int main() {
 							chance = rand() % 100 + 1;		// 50% catch rate
 						else if (level == 3)
 							chance = rand() % 75 + 1;		// 33% catch rate
+						cout << "Chance to catch: %" << chance << "\n";
 						if (chance >= 50) {
 							cout << "You caught a wild " << randPokemon->show_name() << "!\n";
-							// ADD FUNCTIONALITY THAT REMOVES ONE POKEMON FROM USER (USERS CHOICE) AND ADDS THIS ONE
+							cout << "What pokemon would you like to replace?\n";
+							for (int i = 0; i < 3; i++) {
+								cout << i+1 << ". " << user->show_pokemon(i) << "\n";
+							}
+							cin >> userinput;
+							while (userinput != 1 && userinput != 2 && userinput != 3) {
+								cout << "Invalid input! Please try again!\n";
+								cin >> userinput;
+							}
+							userinput = userinput - 1;
+							user->new_pokemon(userinput, *randPokemon);
+							cout << "Your current pokemon are:\n";
+							for (int i = 0; i < 3; i++) {
+								cout << user->show_pokemon(i) << " ";
+							}
+							cout << "\n";
 						}
 						else {
 							cout << "You didn't catch it!\n";
@@ -342,6 +377,154 @@ int main() {
 			}
 		}
 		
+		// Show pokemon data and use various items
+		else if (userinput == 4) {
+			while (1) {
+				cout << "Your current pokemon are:\n";
+				for (int i = 0; i < 3; i++) {
+					cout << user->show_pokemon(i) << ": \n";
+					if (poke_data.poke_type[user->show_pokemon_type(i)] == NORMAL) {
+						typeString = "Normal";
+					}
+					else if (poke_data.poke_type[user->show_pokemon_type(i)] == WATER) {
+						typeString = "Water";
+					}
+					else if (poke_data.poke_type[user->show_pokemon_type(i)] == GRASS) {
+						typeString = "Grass";
+					}
+					else if (poke_data.poke_type[user->show_pokemon_type(i)] == GROUND) {
+						typeString = "Ground";
+					}
+					else if (poke_data.poke_type[user->show_pokemon_type(i)] == FIRE) {
+						typeString = "Fire";
+					}
+					else if (poke_data.poke_type[user->show_pokemon_type(i)] == ELECTRIC) {
+						typeString = "Electric";
+					}
+					cout << " Type: " << typeString << "\n";
+					cout << " Current HP: " << user->show_pokemon_hp(i) << "\n";
+					cout << " Current PP: " << user->show_pokemon_pp(i) << "\n";
+				}
+
+				if (user->show_potion() > 0 || user->show_elixir() > 0 || user->show_revive() > 0) {
+					cout << "Would you like to use any of your buffs?\n";
+					cout << "1. Yes\n";
+					cout << "2. No\n";
+					cin >> userinput;
+					while (userinput != 1 && userinput != 2) {
+						cout << "Invalid input! Please try again!\n";
+						cin >> userinput;
+					}
+					if (userinput == 1) {
+						while (1) {
+							cout << "Which would you like to use?\n";
+							cout << "1. Potion - Current Supply: " << user->show_potion() << "\n";
+							cout << "2. Elixir - Current Supply: " << user->show_elixir() << "\n";
+							cout << "3. Revive - Current Supply: " << user->show_revive() << "\n";
+							cout << "4. Exit\n";
+							cin >> userinput;
+							// ADD ADDITION OF HP AND PP AND REVIVE
+							if (userinput == 1) {
+								if (user->show_potion() == 0) {
+									cout << "You dont have enough!\n";
+								}
+								else {
+									cout << "What pokemon would you like to use it on?\n";
+									for (int i = 0; i < 3; i++) {
+										cout << i + 1 << ". " << user->show_pokemon(i) << "\n";
+									}
+									cin >> userinput;
+									while (userinput != 1 && userinput != 2 && userinput != 3) {
+										cout << "Invalid input! Please try again!\n";
+										cin >> userinput;
+									}
+									if (userinput == 1) {
+										cout << user->show_pokemon(1) << "'s Current HP: " << user->show_pokemon_hp(1) << "\n";
+									}
+									else if (userinput == 2) {
+										cout << user->show_pokemon(2) << "'s Current HP: " << user->show_pokemon_hp(2) << "\n";
+									}
+									else if (userinput == 3) {
+										cout << user->show_pokemon(3) << "'s Current HP: " << user->show_pokemon_hp(3) << "\n";
+									}
+								}
+							}
+							else if (userinput == 2) {
+								if (user->show_elixir() == 0) {
+									cout << "You dont have enough!\n";
+								}
+								else {
+									cout << "What pokemon would you like to use it on?\n";
+									for (int i = 0; i < 3; i++) {
+										cout << i + 1 << ". " << user->show_pokemon(i) << "\n";
+									}
+									cin >> userinput;
+									while (userinput != 1 && userinput != 2 && userinput != 3) {
+										cout << "Invalid input! Please try again!\n";
+										cin >> userinput;
+									}
+									if (userinput == 1) {
+										cout << user->show_pokemon(1) << "'s Current PP: " << user->show_pokemon_pp(1) << "\n";
+									}
+									else if (userinput == 2) {
+										cout << user->show_pokemon(2) << "'s Current PP: " << user->show_pokemon_pp(2) << "\n";
+									}
+									else if (userinput == 3) {
+										cout << user->show_pokemon(3) << "'s Current PP: " << user->show_pokemon_pp(3) << "\n";
+									}
+								}
+							}
+							else if (userinput == 3) {
+								if (user->show_revive() == 0) {
+									cout << "You dont have enough!\n";
+								}
+								else {
+									cout << "What pokemon would you like to use it on?\n";
+									for (int i = 0; i < 3; i++) {
+										cout << i + 1 << ". " << user->show_pokemon(i) << "\n";
+									}
+									cin >> userinput;
+									while (userinput != 1 && userinput != 2 && userinput != 3) {
+										cout << "Invalid input! Please try again!\n";
+										cin >> userinput;
+									}
+									if (userinput == 1) {
+										
+									}
+									else if (userinput == 2) {
+
+									}
+									else if (userinput == 3) {
+
+									}
+								}
+							}
+							else if (userinput == 4) {
+								cout << "You selected to leave\n";
+								check = true;
+								break;
+							}
+							else {
+								cout << "Invalid input!\n";
+							}
+							cout << "\n";
+						}
+					}
+					else if (userinput == 2) {
+						break;
+					}
+					else {
+						cout << "Invalid input!\n";
+					}
+					if (check == true) {
+						check = false;
+						break;
+					}
+				}
+				break;
+			}
+		}
+
 		else {
 			cout << "Invalid input! Please try again\n";
 		}

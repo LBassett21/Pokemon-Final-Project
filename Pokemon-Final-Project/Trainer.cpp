@@ -28,6 +28,24 @@ int Trainer::show_revive() {
 	return num_revive;
 }
 
+string Trainer::show_pokemon(int in_num) {
+	return party[in_num].show_name();
+}
+int Trainer::show_pokemon_type(int in_num) {
+	return party[in_num].show_type();
+}
+int Trainer::show_pokemon_hp(int in_num) {
+	return party[in_num].show_hp();
+}
+int Trainer::show_pokemon_pp(int in_num) {
+	return party[in_num].show_pp();
+}
+
+
+void Trainer::new_pokemon(int party_member, Pokemon& pNew) {
+	party[party_member] = pNew;
+}
+
 // TODO: create methods for using moves / other menu options
 void Trainer::use_potion() {
 	num_potion -= 1;

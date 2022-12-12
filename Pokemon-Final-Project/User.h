@@ -17,10 +17,10 @@ public:
     int show_pokeball();
 	int show_balance();
 
-	void buy_pokeball();
-	void buy_potion();
-	void buy_elixir();
-	void buy_revive();
+	void buy_pokeball(int in_num);
+	void buy_potion(int in_num);
+	void buy_elixir(int in_num);
+	void buy_revive(int in_num);
 
 	void use_pokeball();
 };

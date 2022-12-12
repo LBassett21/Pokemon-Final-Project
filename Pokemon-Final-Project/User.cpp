@@ -22,19 +22,21 @@ int User::show_balance() {
 	return balance;
 }
 
-// TODO: Subtract from balance
-// Add error checking when buying / cout stuff here to reduce main.cpp clutter
-void User::buy_pokeball() {
-	num_pokeball += 1;
+void User::buy_pokeball(int in_num) {
+	num_pokeball += (1 * in_num);
+	balance = balance - (200 * in_num);
 }
-void User::buy_potion() {
-	num_potion += 1;
+void User::buy_potion(int in_num) {
+	num_potion += (1 * in_num);
+	balance = balance - (100 * in_num);
 }
-void User::buy_elixir() {
-	num_elixir += 1;
+void User::buy_elixir(int in_num) {
+	num_elixir += (1 * in_num);
+	balance = balance - (150 * in_num);
 }
-void User::buy_revive() {
-	num_revive += 1;
+void User::buy_revive(int in_num) {
+	num_revive += (1 * in_num);
+	balance = balance - (300 * in_num);
 }
 void User::use_pokeball() {
 	num_pokeball -= 1;

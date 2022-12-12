@@ -20,12 +20,20 @@ public:
 	int show_potion();
 	int show_elixir();
 	int show_revive();
+	string show_pokemon(int in_num);
+	int show_pokemon_type(int in_num);
+	int show_pokemon_hp(int in_num);
+	int show_pokemon_pp(int in_num);
+
+
 	// TODO: create methods to show attributes of each Pokemon
 
 	// TODO: create methods for using moves / other menu options
 	void use_potion();
 	void use_elixir();
 	void use_revive(int party_member);
+
+	void new_pokemon(int party_member, Pokemon& pNew);
 
 	Pokemon show_active_pokemon();
 	//virtual void use_move();
