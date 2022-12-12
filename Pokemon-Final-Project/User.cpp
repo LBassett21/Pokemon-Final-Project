@@ -50,13 +50,106 @@ void User::use_pokeball() {
 	num_pokeball -= 1;
 }
 
+void User::use_potion() {
+	int userinput;
+	if (num_potion == 0) {
+		cout << "You do not have any Potions!\n";
+	}
+	else {
+		cout << "What pokemon would you like to use it on?\n";
+		for (int i = 0; i < 3; i++) {
+			cout << i + 1 << ". " << party[i].show_name() << "\n";
+		}
+		cin >> userinput;
+		while (userinput != 1 && userinput != 2 && userinput != 3) {
+			cout << "Invalid input! Please try again!\n";
+			cin >> userinput;
+		}
+		cout << party[userinput - 1].show_name() << "'s Current HP: " << party[userinput - 1].show_hp() << "\n";
+		if (party[userinput - 1].hp == party[userinput - 1].max_hp) {
+			cout << "You are already at max HP!\n";
+		}
+		else {
+			num_potion -= 1;
+			if ((party[userinput - 1].hp + 20) > party[userinput - 1].max_hp) {
+				party[userinput - 1].hp = party[userinput - 1].max_hp;
+			}
+			else {
+				party[userinput - 1].hp += 20;
+			}
+			cout << party[userinput - 1].show_name() << "'s New HP: " << party[userinput - 1].show_hp() << "\n";
+		}
+	}
+}
+void User::use_elixir() {
+	int userinput;
+	if (num_elixir == 0) {
+		cout << "You do not have any Elixirs!\n";
+	}
+	else {
+		cout << "What pokemon would you like to use it on?\n";
+		for (int i = 0; i < 3; i++) {
+			cout << i + 1 << ". " << party[i].show_name() << "\n";
+		}
+		cin >> userinput;
+		while (userinput != 1 && userinput != 2 && userinput != 3) {
+			cout << "Invalid input! Please try again!\n";
+			cin >> userinput;
+		}
+		cout << party[userinput - 1].show_name() << "'s Current PP: " << party[userinput - 1].show_pp() << "\n";
+		if (party[userinput - 1].pp == party[userinput - 1].max_pp) {
+			cout << "You already have max PP!\n";
+		}
+		else {
+			num_elixir -= 1;
+			if ((party[userinput - 1].pp + 20) >= party[userinput - 1].max_pp) {
+				party[userinput - 1].pp = party[userinput - 1].max_pp;
+			}
+			else {
+				party[userinput - 1].pp += 20;
+			}
+			cout << party[userinput - 1].show_name() << "'s New PP is: " << party[userinput - 1].show_pp() << "\n";
+		}
+	}
+}
+void User::use_revive() {
+	int userinput;
+	if (num_revive < 0) {
+		cout << "You don't have any Revives!\n";
+	}
+	else if (party[0].hp > 0 || party[1].hp > 0 || party[2].hp > 0) {
+		cout << "None of your pokemon have fainted!\n";
+	}
+	else {
+		cout << "What pokemon would you like to use it on?\n";
+		for (int i = 0; i < 3; i++) {
+			cout << i + 1 << ". " << party[i].show_name() << "\n";
+		}
+		cin >> userinput;
+		while (userinput != 1 && userinput != 2 && userinput != 3) {
+			cout << "Invalid input! Please try again!\n";
+			cin >> userinput;
+		}
+		if (party[userinput - 1].hp > 0) {
+			cout << "This Pokemon has not fainted!\n";
+		}
+		else {
+			party[userinput - 1].hp = party[userinput - 1].max_hp / 2;	// Restore Pokemon to half HP
+			num_revive -= 1;
+			cout << party[userinput - 1].show_name() << " has been revived!\n";
+		}
+	}
+}
+
 void User::switch_active_pokemon() {
 	int choice;
 	int count = 0;
 	int partyChoice[2] = { -1,-1 };
 
-	cout << "Select a new Pokemon to swap in: \n";
-	if (!party[0].is_fainted() || !party[1].is_fainted() || !party[2].is_fainted()) {
+	if (party[0].is_fainted() && party[1].is_fainted() && party[2].is_fainted())
+		cout << show_name() << " tried to swap Pokemon but failed!\n";
+	else {
+		cout << "Select a new Pokemon to swap in: \n";
 		for (int i = 0; i < 3; i++) {
 			if (!party[i].is_fainted() && (party[i].show_name() != active_pokemon->show_name())) {
 				cout << i + 1 << ". " << party[i].show_name() << "\n";
@@ -65,16 +158,14 @@ void User::switch_active_pokemon() {
 			}
 		}
 		cin >> choice;
-		do {
+		while ((choice != (partyChoice[0] - 1)) && (choice != (partyChoice[1] - 1))) {
 			cout << "Invalid option. Please try again.\n";
 			cin >> choice;
-		} while ((choice != partyChoice[0]) && (choice != partyChoice[1]));
+		}
 
 		active_pokemon = &party[choice - 1];
 		cout << "Go! " << active_pokemon->show_name() << "!\n";
-	}
-	else {
-		cout << "You don't have any other Pokemon to swap to!\n";
+
 	}
 	
 }

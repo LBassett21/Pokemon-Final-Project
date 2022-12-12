@@ -32,9 +32,9 @@ public:
 	// Battle methods
 	void print_moves();
 	void use_move(int move, Pokemon& enemy);
-	void use_potion();
-	void use_elixir();
-	void use_revive();
+	virtual void use_potion();
+	virtual void use_elixir();
+	virtual void use_revive();
 	
 	void faint();
 	virtual void switch_active_pokemon();

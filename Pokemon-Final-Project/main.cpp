@@ -66,15 +66,19 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 		cout << "What will you do?" << endl;
 		cout << "1. Fight\n" << "2. Bag\n" << "3. Pokemon\n";
 		cin >> choice;
+		while (choice < 1 || choice > 4) {
+			cout << "Invalid choice. Please try again." << endl;
+			cin >> choice;
+		}
 
 		switch (choice) {
 		case 1:
 			user.print_moves();
 			cin >> move_choice;
-			do  {
+			while (move_choice < 1 || move_choice > 4) {
 				cout << "Invalid choice. Please try again." << endl;
 				cin >> move_choice;
-			} while (move_choice < 1 || move_choice > 4);
+			}
 
 			cout << endl;
 			move_choice -= 1;											// Shift move number down 1 to match array indexing
@@ -82,11 +86,21 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 			break;
 		case 2:
 			cout << "Which item would you like to use?\n"
-				 << "1. Potion - Current Supply: " << user.show_potion() << "\n"
-				 << "2. Elixir - Current Supply: " << user.show_elixir() << "\n"
-				 << "3. Revive - Current Supply: " << user.show_revive() << "\n"
-				 << "4. Exit\n";
+				<< "1. Potion - Current Supply: " << user.show_potion() << "\n"
+				<< "2. Elixir - Current Supply: " << user.show_elixir() << "\n"
+				<< "3. Revive - Current Supply: " << user.show_revive() << "\n";
 			cin >> item_choice;
+			while (item_choice > 3 || item_choice < 1) {
+				cout << "Invalid choice. Please try again." << endl;
+				cin >> item_choice;
+			} 
+			
+			if(item_choice == 1)
+				user.use_potion();
+			if (item_choice == 2)
+				user.use_elixir();
+			else if (item_choice == 3)
+				user.use_revive();
 			
 			break;
 		case 3:
@@ -119,6 +133,13 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 				opponent.use_move(opponentMove, *user.return_active_pokemon());
 				break;
 			case 2:
+				item_choice = (rand() % 3) + 1;
+				if (item_choice == 1)
+					opponent.use_potion();
+				if (item_choice == 2)
+					opponent.use_elixir();
+				else if (item_choice == 3)
+					opponent.use_revive();
 				break;
 			case 3:
 				if (choice == 1)
