@@ -460,13 +460,19 @@ int main() {
 										cin >> userinput;
 									}
 									if (userinput == 1) {
-										cout << user->show_pokemon(1) << "'s Current HP: " << user->show_pokemon_hp(1) << "\n";
+										cout << user->show_pokemon(0) << "'s Current HP: " << user->show_pokemon_hp(0) << "\n";
+										user->use_potion(0);
+										cout << user->show_pokemon(0) << "'s New HP: " << user->show_pokemon_hp(0) << "\n";
 									}
 									else if (userinput == 2) {
-										cout << user->show_pokemon(2) << "'s Current HP: " << user->show_pokemon_hp(2) << "\n";
+										cout << user->show_pokemon(1) << "'s Current HP: " << user->show_pokemon_hp(1) << "\n";
+										user->use_potion(1);
+										cout << user->show_pokemon(1) << "'s New HP: " << user->show_pokemon_hp(1) << "\n";
 									}
 									else if (userinput == 3) {
-										cout << user->show_pokemon(3) << "'s Current HP: " << user->show_pokemon_hp(3) << "\n";
+										cout << user->show_pokemon(2) << "'s Current HP: " << user->show_pokemon_hp(2) << "\n";
+										user->use_potion(2);
+										cout << user->show_pokemon(2) << "'s New HP: " << user->show_pokemon_hp(2) << "\n";
 									}
 								}
 							}
@@ -485,13 +491,19 @@ int main() {
 										cin >> userinput;
 									}
 									if (userinput == 1) {
-										cout << user->show_pokemon(1) << "'s Current PP: " << user->show_pokemon_pp(1) << "\n";
+										cout << user->show_pokemon(0) << "'s Current PP: " << user->show_pokemon_pp(0) << "\n";
+										user->use_elixir(0);
+										cout << user->show_pokemon(0) << "'s New PP: " << user->show_pokemon_pp(0) << "\n";
 									}
 									else if (userinput == 2) {
-										cout << user->show_pokemon(2) << "'s Current PP: " << user->show_pokemon_pp(2) << "\n";
+										cout << user->show_pokemon(1) << "'s Current PP: " << user->show_pokemon_pp(1) << "\n";
+										user->use_elixir(1);
+										cout << user->show_pokemon(1) << "'s New PP: " << user->show_pokemon_pp(1) << "\n";
 									}
 									else if (userinput == 3) {
-										cout << user->show_pokemon(3) << "'s Current PP: " << user->show_pokemon_pp(3) << "\n";
+										cout << user->show_pokemon(2) << "'s Current PP: " << user->show_pokemon_pp(2) << "\n";
+										user->use_elixir(2);
+										cout << user->show_pokemon(2) << "'s New PP: " << user->show_pokemon_pp(2) << "\n";
 									}
 								}
 							}
@@ -510,13 +522,13 @@ int main() {
 										cin >> userinput;
 									}
 									if (userinput == 1) {
-										
+										user->use_revive(0);
 									}
 									else if (userinput == 2) {
-
+										user->use_revive(1);
 									}
 									else if (userinput == 3) {
-
+										user->use_revive(2);
 									}
 								}
 							}
