@@ -77,3 +77,7 @@ string Pokemon::show_type() {
 string Pokemon::show_move(int move_num) {
 	return move_name[move_num];
 }
+
+bool Pokemon::is_fainted() {
+	return fainted;
+}

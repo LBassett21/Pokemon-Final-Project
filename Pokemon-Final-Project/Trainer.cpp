@@ -52,8 +52,12 @@ void Trainer::new_pokemon(int party_member, Pokemon& pNew) {
 	party[party_member] = pNew;
 }
 
-Pokemon Trainer::show_active_pokemon() {
+Pokemon& Trainer::return_active_pokemon() {
 	return active_pokemon;
+}
+
+Pokemon& Trainer::return_pokemon(int in_num) {
+	return party[in_num];
 }
 
 // TODO: create methods for using moves / other menu options
@@ -119,9 +123,9 @@ void Trainer::print_moves() {
 }
 
 void Trainer::use_move(int move, Pokemon& enemy) {
-	// Check PP
+	// Check PP - if not enough, the move misses
 	if (active_pokemon.move_pp[move] > active_pokemon.pp) {
-		cout << "You don't have enough PP to use this move!\n";
+		cout << active_pokemon.show_name() << "'s attack missed!\n";
 	}
 	else {
 		cout << active_pokemon.show_name() << " used " << active_pokemon.show_move(move) << "!\n";
@@ -133,6 +137,18 @@ void Trainer::use_move(int move, Pokemon& enemy) {
 		else {
 			enemy.hp -= active_pokemon.move_dmg[move];
 		}
+		active_pokemon.pp -= active_pokemon.move_pp[move];
 	}
 }
 
+void Trainer::faint() {
+	active_pokemon.fainted = true;
+	active_pokemon.hp = 0;
+
+	cout << active_pokemon.show_name() << " has fainted!\n";
+	// Replace with first Pokemon in party that isn't fainted
+	for (int i = 0; i < 3; i++) {
+		if (!party[i].fainted)
+			active_pokemon = party[i];
+	}
+}

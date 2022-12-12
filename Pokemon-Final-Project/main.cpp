@@ -47,35 +47,35 @@ Pokemon* generate_pokemon() {
 }
 
 // Simulate entire fight, only break when one trainer is defeated
-void fightTrainer(User* user, Trainer& opponent, bool& userDefeated) {
+void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 	bool opponentDefeated = false;
 	int choice = 0;
 	int move_choice = 0;
 	int item_choice = 0;
 	int poke_choice = 0;
 	int opponentMove;
-	Pokemon enemyPokemon = opponent.show_active_pokemon();
-	Pokemon userPokemon = user->show_active_pokemon();
 	
 	
 	cout << opponent.show_name() << " wants to fight!" << endl;
-	cout << opponent.show_name() << " sent out " << opponent.show_active_pokemon().show_name() << "!" << endl;
-	cout << "You sent out " << user->show_active_pokemon().show_name() << "!" << endl;
+	cout << opponent.show_name() << " sent out " << opponent.return_active_pokemon().show_name() << "!" << endl;
+	cout << "You sent out " << user.return_active_pokemon().show_name() << "!" << endl;
 	do {
-		cout << opponent.show_active_pokemon().show_name() << " - " << "HP: " << opponent.show_active_pokemon().show_hp() << " PP: " << opponent.show_active_pokemon().show_pp() << endl;
-		cout << user->show_active_pokemon().show_name() << " - " << "HP: " << user->show_active_pokemon().show_hp() << " PP: " << user->show_active_pokemon().show_pp() << endl;
+		cout << "\n";
+		cout << opponent.return_active_pokemon().show_name() << " - " << "HP: " << opponent.return_active_pokemon().show_hp() << " PP: " << opponent.return_active_pokemon().show_pp() << endl;
+		cout << user.return_active_pokemon().show_name() << " - " << "HP: " << user.return_active_pokemon().show_hp() << " PP: " << user.return_active_pokemon().show_pp() << endl;
 
 		cout << "What will you do?" << endl;
 		cout << "1. Fight\n" << "2. Bag\n" << "3. Pokemon\n";
 		cin >> choice;
 		switch (choice) {
 		case 1:
-			user->print_moves();
+			user.print_moves();
 			cin >> move_choice;
 			while (move_choice < 1 || move_choice > 4) {
 				cout << "Invalid choice. Please try again." << endl;
 			}
-			user->use_move(move_choice, enemyPokemon);
+			move_choice -= 1;											// Shift move number down 1 to match array indexing
+			user.use_move(move_choice, opponent.return_active_pokemon());
 			break;
 		case 2:
 			break;
@@ -86,16 +86,23 @@ void fightTrainer(User* user, Trainer& opponent, bool& userDefeated) {
 			break;
 		}
 
-		
-		if (opponent.show_active_pokemon().show_hp() <= 0) {
-
+		if (opponent.return_active_pokemon().show_hp() <= 0) {
+			if (opponent.return_pokemon(0).is_fainted() && opponent.return_pokemon(1).is_fainted() && opponent.return_pokemon(2).is_fainted()) {
+				cout << opponent.return_active_pokemon().show_name() << " has fainted!\n";
+				cout << "You defeated " << opponent.show_name() << "!\n";
+				opponentDefeated = true;
+				break;
+			}
+			else {
+				opponent.faint();
+			}
 		}
 		// Opponent (AI) move
 		opponentMove = (rand() % 3) + 1;		// Pick either option 1, 2, or 3
 		switch (opponentMove) {
 		case 1:
-			opponentMove = (rand() % 4) + 1;	// Pick move 1, 2, 3, or 4
-			opponent.use_move(opponentMove, userPokemon);
+			opponentMove = rand() % 4;	// Pick move[0-3]
+			opponent.use_move(opponentMove, user.return_active_pokemon());
 			break;
 		case 2:
 			break;
@@ -233,7 +240,7 @@ int main() {
 		for (int j = 0; j < 4; j++) {
 			moves[j] = generate_move(pokeChoices[i], moves[0], moves[1], moves[2]);
 		}
-		userPokemon[i] = new Pokemon(pokeChoices[i], 80, 100, pokeChoices[i], moves[0], moves[1], moves[2], moves[3]);		// All user Pokemon have 80 HP and 100 PP
+		userPokemon[i] = new Pokemon(pokeChoices[i], 80, 100, poke_data.poke_type[pokeChoices[i]], moves[0], moves[1], moves[2], moves[3]);		// All user Pokemon have 80 HP and 100 PP
 		// Reset move array to -1
 		for (int k = 0; k < 4; k++) {
 			moves[k] = -1;
@@ -326,15 +333,16 @@ int main() {
 
 		// enter battle
 		else if (userinput == 2) {
+			cout << endl;
 			switch (level) {
 			case 1:
-				fightTrainer(user, *opponent1, userDefeated);
+				fightTrainer(*user, *opponent1, userDefeated);
 				break;
 			case 2:
-				fightTrainer(user, *opponent2, userDefeated);
+				fightTrainer(*user, *opponent2, userDefeated);
 				break;
 			case 3:
-				fightTrainer(user, *opponent3, userDefeated);
+				fightTrainer(*user, *opponent3, userDefeated);
 				break;
 			}
 

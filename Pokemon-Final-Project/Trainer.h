@@ -21,7 +21,8 @@ public:
 	int show_potion();
 	int show_elixir();
 	int show_revive();
-	Pokemon show_active_pokemon();
+	Pokemon& return_active_pokemon();
+	Pokemon& return_pokemon(int in_num);
 	string show_pokemon(int in_num);
 	string show_pokemon_type(int in_num);
 	int show_pokemon_hp(int in_num);
@@ -34,8 +35,9 @@ public:
 	void use_potion(int party_member);
 	void use_elixir(int party_member);
 	void use_revive(int party_member);
+	
 	void switch_active_pokemon();
-	void faint();
+	virtual void faint();
 
 };
 

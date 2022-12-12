@@ -1,4 +1,8 @@
 #include "User.h"
+#include <iostream>
+
+using std::cin;
+using std::cout;
 
 User::User(string in_name, float in_bal, int num_pb, int num_p, int num_e, int num_r, Pokemon& p1, Pokemon& p2, Pokemon& p3) {
 	name = in_name;
@@ -42,4 +46,16 @@ void User::buy_revive(int in_num) {
 }
 void User::use_pokeball() {
 	num_pokeball -= 1;
+}
+
+void User::faint() {
+	active_pokemon.fainted = true;
+	active_pokemon.hp = 0;
+
+	cout << active_pokemon.show_name() << " has fainted!\n";
+	cout << "Select a new Pokemon to swap in: \n";
+	for (int i = 0; i < 3; i++) {
+		if (!party[i].fainted)
+			active_pokemon = party[i];
+	}
 }
