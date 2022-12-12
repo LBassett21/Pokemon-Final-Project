@@ -165,33 +165,33 @@ int main() {
 	bool userDefeated = false;
 
 	cout << "My name is Professor Oak\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "Some people call me the Pokemon Professor!\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "This world is inhabited by creatures called Pokemon!\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "Pokemon are pets. Others use them for fights.\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "Myself? I study Pokemon as a professon.\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "First, what is your name?\n";
 	cout << "Name: ";
 	cin >> username;
 	cout << "Right! So your name is " << username << "!\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "This is my grandson.\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "He's been your rival since you've been a baby.\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "...Erm, what is his name again?\n";
 	cout << "Name: ";
 	cin >> rivalname;
 	cout << "Thats right! I remember now! His name is " << rivalname << "\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << username << "! Your very own Pokemon legend is about to unfold!\n";
-	Sleep(150);
+	Sleep(1500);
 	cout << "A world of dreams and adventures with Pokemon awaits! Let's go!\n\n";
-	Sleep(150);
+	Sleep(1500);
 
 	cout << "To start, pick your 3 starter Pokemon!\n";
 	do {
