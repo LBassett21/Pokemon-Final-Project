@@ -52,7 +52,6 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 	int choice = 0;
 	int move_choice = 0;
 	int item_choice = 0;
-	int poke_choice = 0;
 	int opponentMove;
 	
 	
@@ -71,6 +70,7 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 		case 1:
 			user.print_moves();
 			cin >> move_choice;
+			cout << endl;
 			while (move_choice < 1 || move_choice > 4) {
 				cout << "Invalid choice. Please try again." << endl;
 			}
@@ -80,37 +80,57 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 		case 2:
 			break;
 		case 3:
+			cout << "Return, " << user.return_active_pokemon().show_name() << "!\n";
+			user.switch_active_pokemon();
 			break;
 		default:
 			cout << "Invalid option. Try again.\n";
 			break;
 		}
-
+		
+		// Check if opponent Pokemon has fainted / has lost
 		if (opponent.return_active_pokemon().show_hp() <= 0) {
+			opponent.faint();
 			if (opponent.return_pokemon(0).is_fainted() && opponent.return_pokemon(1).is_fainted() && opponent.return_pokemon(2).is_fainted()) {
-				cout << opponent.return_active_pokemon().show_name() << " has fainted!\n";
 				cout << "You defeated " << opponent.show_name() << "!\n";
 				opponentDefeated = true;
 				break;
 			}
 			else {
-				opponent.faint();
+				opponent.switch_active_pokemon();
 			}
 		}
-		// Opponent (AI) move
-		opponentMove = (rand() % 3) + 1;		// Pick either option 1, 2, or 3
-		switch (opponentMove) {
-		case 1:
-			opponentMove = rand() % 4;	// Pick move[0-3]
-			opponent.use_move(opponentMove, user.return_active_pokemon());
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		default:
-			break;
+		else {
+			// Opponent (AI) move
+			opponentMove = (rand() % 3) + 1;		// Pick either option 1, 2, or 3
+			switch (opponentMove) {
+			case 1:
+				opponentMove = rand() % 4;	// Pick move[0-3]
+				opponent.use_move(opponentMove, user.return_active_pokemon());
+				break;
+			case 2:
+				break;
+			case 3:
+				cout << opponent.show_name() << " returned " << opponent.return_active_pokemon().show_name() << "!\n";
+				opponent.switch_active_pokemon();
+				break;
+			default:
+				break;
+			}
 		}
+		// Check if user Pokemon has fainted / has lost
+		if (user.return_active_pokemon().show_hp() <= 0) {
+			user.faint();
+			if (user.return_pokemon(0).is_fainted() && user.return_pokemon(1).is_fainted() && user.return_pokemon(2).is_fainted()) {
+				cout << "You have been defeated!\n";
+				userDefeated = true;
+				break;
+			}
+			else {
+				user.switch_active_pokemon();
+			}
+		}
+
 	} while (!userDefeated && !opponentDefeated);
 }
 

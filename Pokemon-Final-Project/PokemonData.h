@@ -141,7 +141,7 @@ struct {
 		"HYDRO PUMP", "BUBBLE BEAM", "FLAMETHROWER", "FIRE SPIN", "RAZOR LEAF", "VINE WHIP", "EARTHQUAKE", 
 		"DIG", "THUNDER PUNCH", "THUNDERBOLT", "QUICK ATTACK", "TACKLE", "MEGA KICK", "FURY ATTACK"
 	};
-	int move_damage[14] = { 30, 40, 30, 30, 40, 30, 40, 30, 40, 20, 20, 30, 30 };	// Damage per move
+	int move_damage[14] = { 40, 50, 40, 50, 40, 50, 40, 50, 40, 20, 20, 30, 30 };	// Damage per move
 	int move_pp[14] = { 20, 30, 20, 30, 20, 30, 20, 30, 20, 30, 10, 10, 15, 15 };	// PP cost per move
 	int move_type[14] = { WATER, WATER, FIRE, FIRE, GRASS, GRASS, GROUND, GROUND, ELECTRIC, ELECTRIC, NORMAL, NORMAL, NORMAL, NORMAL};
 } poke_data; 

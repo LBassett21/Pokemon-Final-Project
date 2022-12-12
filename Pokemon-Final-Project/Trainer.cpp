@@ -63,10 +63,10 @@ Pokemon& Trainer::return_pokemon(int in_num) {
 // TODO: create methods for using moves / other menu options
 void Trainer::use_potion(int party_member) {
 	if (num_potion == 0) {
-		cout << "You do not have any potions!\n";
+		cout << "You do not have any Potions!\n";
 	}
 	else if (party[party_member].hp == party[party_member].max_hp) {
-		cout << "You alre already at max HP!\n";
+		cout << "You are already at max HP!\n";
 	}
 	else {
 		num_potion -= 1;
@@ -74,14 +74,14 @@ void Trainer::use_potion(int party_member) {
 			party[party_member].hp = party[party_member].max_hp;
 		}
 		else {
-			party[party_member].hp = party[party_member].hp + 20;
+			party[party_member].hp += 20;
 		}
 		//cout << party[party_member].show_name() << "'s New HP is: " << party[party_member].show_hp() << "\n";
 	}
 }
 void Trainer::use_elixir(int party_member) {
 	if (num_elixir == 0) {
-		cout << "You do not have any elixir's!\n";
+		cout << "You do not have any Elixirs!\n";
 	}
 	else if (party[party_member].pp == party[party_member].max_pp) {
 		cout << "You already have max PP!\n";
@@ -92,7 +92,7 @@ void Trainer::use_elixir(int party_member) {
 			party[party_member].pp = party[party_member].max_pp;
 		}
 		else {
-			party[party_member].pp = party[party_member].pp + 20;
+			party[party_member].pp += 20;
 		}
 		//cout << party[party_member].show_name() << "'s New PP is: " << party[party_member].show_pp() << "\n";
 	}
@@ -104,7 +104,7 @@ void Trainer::use_revive(int party_member) {
 		cout << "This Pokemon has not fainted!\n";
 	}
 	else if (num_revive < 0) {
-		cout << "You don't have a Revive!\n";
+		cout << "You don't have any Revives!\n";
 	}
 	else {
 		party[party_member].hp = party[party_member].max_hp / 2;	// Restore Pokemon to half HP
@@ -141,14 +141,24 @@ void Trainer::use_move(int move, Pokemon& enemy) {
 	}
 }
 
+// Mark active Pokemon as fainted
 void Trainer::faint() {
-	active_pokemon.fainted = true;
 	active_pokemon.hp = 0;
 
 	cout << active_pokemon.show_name() << " has fainted!\n";
-	// Replace with first Pokemon in party that isn't fainted
+
+	// Find active pokemon in party array and mark as fainted
 	for (int i = 0; i < 3; i++) {
-		if (!party[i].fainted)
+		if (party[i].show_name() == active_pokemon.show_name())
+			party[i].fainted = true;
+	}
+}
+
+void Trainer::switch_active_pokemon() {
+	// Switch to first Pokemon in party that hasn't fainted & isn't the current active Pokemon
+	for (int i = 0; i < 3; i++) {
+		if (!party[i].fainted && (party[i].show_name() != active_pokemon.show_name()))
 			active_pokemon = party[i];
 	}
+	cout << show_name() << " sent out " << active_pokemon.show_name() << "!\n";
 }

@@ -36,8 +36,9 @@ public:
 	void use_elixir(int party_member);
 	void use_revive(int party_member);
 	
-	void switch_active_pokemon();
-	virtual void faint();
+	void faint();
+	virtual void switch_active_pokemon();
+	
 
 };
 

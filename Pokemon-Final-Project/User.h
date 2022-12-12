@@ -24,6 +24,6 @@ public:
 
 	void use_pokeball();
 	
-	void faint();
+	void switch_active_pokemon();
 };
 
