@@ -61,57 +61,95 @@ Pokemon& Trainer::return_pokemon(int in_num) {
 }
 
 // TODO: create methods for using moves / other menu options
-void Trainer::use_potion(int party_member) {
+void Trainer::use_potion() {
+	int userinput;
 	if (num_potion == 0) {
 		cout << "You do not have any Potions!\n";
 	}
-	else if (party[party_member].hp == party[party_member].max_hp) {
-		cout << "You are already at max HP!\n";
-	}
 	else {
-		num_potion -= 1;
-		if ((party[party_member].hp + 20) > party[party_member].max_hp) {
-			party[party_member].hp = party[party_member].max_hp;
+		cout << "What pokemon would you like to use it on?\n";
+		for (int i = 0; i < 3; i++) {
+			cout << i + 1 << ". " << party[i].show_name() << "\n";
+		}
+		cin >> userinput;
+		while (userinput != 1 && userinput != 2 && userinput != 3) {
+			cout << "Invalid input! Please try again!\n";
+			cin >> userinput;
+		}
+		cout << party[userinput - 1].show_name() << "'s Current HP: " << party[userinput-1].show_hp() << "\n";
+		if (party[userinput-1].hp == party[userinput-1].max_hp) {
+			cout << "You are already at max HP!\n";
 		}
 		else {
-			party[party_member].hp += 20;
+			num_potion -= 1;
+			if ((party[userinput-1].hp + 20) > party[userinput-1].max_hp) {
+				party[userinput-1].hp = party[userinput-1].max_hp;
+			}
+			else {
+				party[userinput-1].hp += 20;
+			}
+			cout << party[userinput - 1].show_name() << "'s New HP: " << party[userinput - 1].show_hp() << "\n";
 		}
-		//cout << party[party_member].show_name() << "'s New HP is: " << party[party_member].show_hp() << "\n";
 	}
 }
-void Trainer::use_elixir(int party_member) {
+void Trainer::use_elixir() {
+	int userinput;
 	if (num_elixir == 0) {
 		cout << "You do not have any Elixirs!\n";
 	}
-	else if (party[party_member].pp == party[party_member].max_pp) {
-		cout << "You already have max PP!\n";
-	}
 	else {
-		num_elixir -= 1;
-		if ((party[party_member].pp + 20) >= party[party_member].max_pp) {
-			party[party_member].pp = party[party_member].max_pp;
+		cout << "What pokemon would you like to use it on?\n";
+		for (int i = 0; i < 3; i++) {
+			cout << i + 1 << ". " << party[i].show_name() << "\n";
+		}
+		cin >> userinput;
+		while (userinput != 1 && userinput != 2 && userinput != 3) {
+			cout << "Invalid input! Please try again!\n";
+			cin >> userinput;
+		}
+		cout << party[userinput - 1].show_name() << "'s Current PP: " << party[userinput - 1].show_pp() << "\n";
+		if (party[userinput-1].pp == party[userinput-1].max_pp) {
+			cout << "You already have max PP!\n";
 		}
 		else {
-			party[party_member].pp += 20;
+			num_elixir -= 1;
+			if ((party[userinput-1].pp + 20) >= party[userinput-1].max_pp) {
+				party[userinput-1].pp = party[userinput-1].max_pp;
+			}
+			else {
+				party[userinput-1].pp += 20;
+			}
+			cout << party[userinput-1].show_name() << "'s New PP is: " << party[userinput-1].show_pp() << "\n";
 		}
-		//cout << party[party_member].show_name() << "'s New PP is: " << party[party_member].show_pp() << "\n";
 	}
-	
 }
-void Trainer::use_revive(int party_member) {
-	// TODO: Only allow user to revive dead Pokemon (HP <= 0) - probably in main function?
-	if (party[party_member].hp > 0) {
-		cout << "This Pokemon has not fainted!\n";
-	}
-	else if (num_revive < 0) {
+void Trainer::use_revive() {
+	int userinput;
+	if (num_revive < 0) {
 		cout << "You don't have any Revives!\n";
 	}
-	else {
-		party[party_member].hp = party[party_member].max_hp / 2;	// Restore Pokemon to half HP
-		num_revive -= 1;
-		cout << party[party_member].show_name() << " has been revived!\n";
+	else if (party[0].hp > 0 || party[1].hp > 0 || party[2].hp > 0) {
+		cout << "None of your pokemon have fainted!\n";
 	}
-	
+	else {
+		cout << "What pokemon would you like to use it on?\n";
+		for (int i = 0; i < 3; i++) {
+			cout << i + 1 << ". " << party[i].show_name() << "\n";
+		}
+		cin >> userinput;
+		while (userinput != 1 && userinput != 2 && userinput != 3) {
+			cout << "Invalid input! Please try again!\n";
+			cin >> userinput;
+		}
+		if (party[userinput-1].hp > 0) {
+			cout << "This Pokemon has not fainted!\n";
+		}
+		else {
+			party[userinput - 1].hp = party[userinput - 1].max_hp / 2;	// Restore Pokemon to half HP
+			num_revive -= 1;
+			cout << party[userinput - 1].show_name() << " has been revived!\n";
+		}
+	}
 }
 
 void Trainer::print_moves() {
