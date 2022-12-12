@@ -6,10 +6,10 @@ using std::cout;
 using std::endl;
 
 Trainer::Trainer() {
-
+	//active_pokemon = &party[0];
 }
 
-Trainer::Trainer(string in_name, int num_p, int num_e, int num_r, Pokemon& p1, Pokemon& p2, Pokemon& p3) {
+Trainer::Trainer(string in_name, int num_p, int num_e, int num_r, Pokemon& p1, Pokemon& p2, Pokemon& p3) : active_pokemon(&p1) {
 	name = in_name;
 	num_potion = num_p;
 	num_elixir = num_e;
@@ -17,7 +17,7 @@ Trainer::Trainer(string in_name, int num_p, int num_e, int num_r, Pokemon& p1, P
 	party[0] = p1;
 	party[1] = p2;
 	party[2] = p3;
-	active_pokemon = p1;
+	active_pokemon = &party[0];
 }
 
 string Trainer::show_name() {
@@ -52,7 +52,7 @@ void Trainer::new_pokemon(int party_member, Pokemon& pNew) {
 	party[party_member] = pNew;
 }
 
-Pokemon& Trainer::return_active_pokemon() {
+Pokemon* Trainer::return_active_pokemon() {
 	return active_pokemon;
 }
 
@@ -116,49 +116,49 @@ void Trainer::use_revive(int party_member) {
 
 void Trainer::print_moves() {
 	cout << "Moves:" << endl
-		<< "1. " << active_pokemon.move_name[0] << " (PP: " << active_pokemon.move_pp[0] << ")" << " (DMG: " << active_pokemon.move_dmg[0] << ")\n"
-		<< "2. " << active_pokemon.move_name[1] << " (PP: " << active_pokemon.move_pp[1] << ")" << " (DMG: " << active_pokemon.move_dmg[1] << ")\n"
-		<< "3. " << active_pokemon.move_name[2] << " (PP: " << active_pokemon.move_pp[2] << ")" << " (DMG: " << active_pokemon.move_dmg[2] << ")\n"
-		<< "4. " << active_pokemon.move_name[3] << " (PP: " << active_pokemon.move_pp[3] << ")" << " (DMG: " << active_pokemon.move_dmg[3] << ")\n";
+		<< "1. " << active_pokemon->move_name[0] << " (PP: " << active_pokemon->move_pp[0] << ")" << " (DMG: " << active_pokemon->move_dmg[0] << ")\n"
+		<< "2. " << active_pokemon->move_name[1] << " (PP: " << active_pokemon->move_pp[1] << ")" << " (DMG: " << active_pokemon->move_dmg[1] << ")\n"
+		<< "3. " << active_pokemon->move_name[2] << " (PP: " << active_pokemon->move_pp[2] << ")" << " (DMG: " << active_pokemon->move_dmg[2] << ")\n"
+		<< "4. " << active_pokemon->move_name[3] << " (PP: " << active_pokemon->move_pp[3] << ")" << " (DMG: " << active_pokemon->move_dmg[3] << ")\n";
 }
 
 void Trainer::use_move(int move, Pokemon& enemy) {
 	// Check PP - if not enough, the move misses
-	if (active_pokemon.move_pp[move] > active_pokemon.pp) {
-		cout << active_pokemon.show_name() << "'s attack missed!\n";
+	if (active_pokemon->move_pp[move] > active_pokemon->pp) {
+		cout << active_pokemon->show_name() << "'s attack missed!\n";
 	}
 	else {
-		cout << active_pokemon.show_name() << " used " << active_pokemon.show_move(move) << "!\n";
+		cout << active_pokemon->show_name() << " used " << active_pokemon->show_move(move) << "!\n";
 
-		if (enemy.weak_type == active_pokemon.move_type[move]) {
-			enemy.hp -= 2*active_pokemon.move_dmg[move];
+		if (enemy.weak_type == active_pokemon->move_type[move]) {
+			enemy.hp -= 2*active_pokemon->move_dmg[move];
 			cout << "It's super effective!\n";
 		}
 		else {
-			enemy.hp -= active_pokemon.move_dmg[move];
+			enemy.hp -= active_pokemon->move_dmg[move];
 		}
-		active_pokemon.pp -= active_pokemon.move_pp[move];
+		active_pokemon->pp -= active_pokemon->move_pp[move];
 	}
 }
 
 // Mark active Pokemon as fainted
 void Trainer::faint() {
-	active_pokemon.hp = 0;
-
-	cout << active_pokemon.show_name() << " has fainted!\n";
+	active_pokemon->hp = 0;
+	active_pokemon->fainted = true;
+	cout << active_pokemon->show_name() << " has fainted!\n";
 
 	// Find active pokemon in party array and mark as fainted
-	for (int i = 0; i < 3; i++) {
-		if (party[i].show_name() == active_pokemon.show_name())
+	/*for (int i = 0; i < 3; i++) {
+		if (party[i].show_name() == active_pokemon->show_name())
 			party[i].fainted = true;
-	}
+	}*/
 }
 
 void Trainer::switch_active_pokemon() {
 	// Switch to first Pokemon in party that hasn't fainted & isn't the current active Pokemon
 	for (int i = 0; i < 3; i++) {
-		if (!party[i].fainted && (party[i].show_name() != active_pokemon.show_name()))
-			active_pokemon = party[i];
+		if (!party[i].fainted && (party[i].show_name() != active_pokemon->show_name()))
+			active_pokemon = &party[i];
 	}
-	cout << show_name() << " sent out " << active_pokemon.show_name() << "!\n";
+	cout << show_name() << " sent out " << active_pokemon->show_name() << "!\n";
 }

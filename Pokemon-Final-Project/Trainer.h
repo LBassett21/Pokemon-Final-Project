@@ -8,8 +8,8 @@ class Trainer
 	int num_potion;
 	int num_elixir;
 	int num_revive;
-	Pokemon party[3];						// Array of all Pokemon in Trainer's party
-	Pokemon active_pokemon;					// Current pokemon selected (default = 0)
+	Pokemon party[3];										// Array of all Pokemon in Trainer's party
+	Pokemon* active_pokemon = &party[0];					// Current pokemon selected (default = 0)
 
 	friend class User;
 
@@ -21,7 +21,7 @@ public:
 	int show_potion();
 	int show_elixir();
 	int show_revive();
-	Pokemon& return_active_pokemon();
+	Pokemon* return_active_pokemon();
 	Pokemon& return_pokemon(int in_num);
 	string show_pokemon(int in_num);
 	string show_pokemon_type(int in_num);

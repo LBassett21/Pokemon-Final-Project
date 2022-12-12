@@ -19,7 +19,7 @@ User::User(string in_name, float in_bal, int num_pb, int num_p, int num_e, int n
 	party[1] = p2;
 	party[2] = p3;
 
-	active_pokemon = p1;
+	active_pokemon = &party[0];
 }
 
 int User::show_pokeball() {
@@ -52,22 +52,26 @@ void User::use_pokeball() {
 
 void User::switch_active_pokemon() {
 	int choice;
-	vector <Pokemon> alivePokemon;
+	int count = 0;
+	int partyChoice[2] = { -1,-1 };
 
 	cout << "Select a new Pokemon to swap in: \n";
-	for (int i = 0; i < 3; i++) {
-		if (!party[i].fainted && (party[i].show_name() != active_pokemon.show_name()))
-			alivePokemon.push_back(party[i]);
-	}
-	if (alivePokemon.size() > 0) {
-		for (int i = 0; i < alivePokemon.size(); i++) {
-			cout << i + 1 << ". " << alivePokemon[i].show_name() << "\n";
+	if (!party[0].is_fainted() || !party[1].is_fainted() || !party[2].is_fainted()) {
+		for (int i = 0; i < 3; i++) {
+			if (!party[i].is_fainted() && (party[i].show_name() != active_pokemon->show_name())) {
+				cout << i + 1 << ". " << party[i].show_name() << "\n";
+				partyChoice[count] = i;
+				count++;
+			}
 		}
-
 		cin >> choice;
-		if (!party[choice].fainted)
-			active_pokemon = alivePokemon[choice - 1];
-		cout << "Go! " << active_pokemon.show_name() << "!\n";
+		do {
+			cout << "Invalid option. Please try again.\n";
+			cin >> choice;
+		} while ((choice != partyChoice[0]) && (choice != partyChoice[1]));
+
+		active_pokemon = &party[choice - 1];
+		cout << "Go! " << active_pokemon->show_name() << "!\n";
 	}
 	else {
 		cout << "You don't have any other Pokemon to swap to!\n";

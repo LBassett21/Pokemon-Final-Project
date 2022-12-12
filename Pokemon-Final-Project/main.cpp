@@ -56,31 +56,41 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 	
 	
 	cout << opponent.show_name() << " wants to fight!" << endl;
-	cout << opponent.show_name() << " sent out " << opponent.return_active_pokemon().show_name() << "!" << endl;
-	cout << "You sent out " << user.return_active_pokemon().show_name() << "!" << endl;
+	cout << opponent.show_name() << " sent out " << opponent.return_active_pokemon()->show_name() << "!" << endl;
+	cout << "You sent out " << user.return_active_pokemon()->show_name() << "!" << endl;
 	do {
 		cout << "\n";
-		cout << opponent.return_active_pokemon().show_name() << " - " << "HP: " << opponent.return_active_pokemon().show_hp() << " PP: " << opponent.return_active_pokemon().show_pp() << endl;
-		cout << user.return_active_pokemon().show_name() << " - " << "HP: " << user.return_active_pokemon().show_hp() << " PP: " << user.return_active_pokemon().show_pp() << endl;
+		cout << opponent.return_active_pokemon()->show_name() << " - " << "HP: " << opponent.return_active_pokemon()->show_hp() << " PP: " << opponent.return_active_pokemon()->show_pp() << endl;
+		cout << user.return_active_pokemon()->show_name() << " - " << "HP: " << user.return_active_pokemon()->show_hp() << " PP: " << user.return_active_pokemon()->show_pp() << endl;
 
 		cout << "What will you do?" << endl;
 		cout << "1. Fight\n" << "2. Bag\n" << "3. Pokemon\n";
 		cin >> choice;
+
 		switch (choice) {
 		case 1:
 			user.print_moves();
 			cin >> move_choice;
-			cout << endl;
-			while (move_choice < 1 || move_choice > 4) {
+			do  {
 				cout << "Invalid choice. Please try again." << endl;
-			}
+				cin >> move_choice;
+			} while (move_choice < 1 || move_choice > 4);
+
+			cout << endl;
 			move_choice -= 1;											// Shift move number down 1 to match array indexing
-			user.use_move(move_choice, opponent.return_active_pokemon());
+			user.use_move(move_choice, *opponent.return_active_pokemon());
 			break;
 		case 2:
+			cout << "Which item would you like to use?\n"
+				 << "1. Potion - Current Supply: " << user.show_potion() << "\n"
+				 << "2. Elixir - Current Supply: " << user.show_elixir() << "\n"
+				 << "3. Revive - Current Supply: " << user.show_revive() << "\n"
+				 << "4. Exit\n";
+			cin >> item_choice;
+			
 			break;
 		case 3:
-			cout << "Return, " << user.return_active_pokemon().show_name() << "!\n";
+			cout << "Return, " << user.return_active_pokemon()->show_name() << "!\n";
 			user.switch_active_pokemon();
 			break;
 		default:
@@ -89,7 +99,7 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 		}
 		
 		// Check if opponent Pokemon has fainted / has lost
-		if (opponent.return_active_pokemon().show_hp() <= 0) {
+		if (opponent.return_active_pokemon()->show_hp() <= 0) {
 			opponent.faint();
 			if (opponent.return_pokemon(0).is_fainted() && opponent.return_pokemon(1).is_fainted() && opponent.return_pokemon(2).is_fainted()) {
 				cout << "You defeated " << opponent.show_name() << "!\n";
@@ -106,12 +116,14 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 			switch (opponentMove) {
 			case 1:
 				opponentMove = rand() % 4;	// Pick move[0-3]
-				opponent.use_move(opponentMove, user.return_active_pokemon());
+				opponent.use_move(opponentMove, *user.return_active_pokemon());
 				break;
 			case 2:
 				break;
 			case 3:
-				cout << opponent.show_name() << " returned " << opponent.return_active_pokemon().show_name() << "!\n";
+				if (choice == 1)
+					cout << "(Your move hit " << opponent.return_active_pokemon()->show_name() << ")\n";
+				cout << opponent.show_name() << " returned " << opponent.return_active_pokemon()->show_name() << "!\n";
 				opponent.switch_active_pokemon();
 				break;
 			default:
@@ -119,7 +131,7 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 			}
 		}
 		// Check if user Pokemon has fainted / has lost
-		if (user.return_active_pokemon().show_hp() <= 0) {
+		if (user.return_active_pokemon()->show_hp() <= 0) {
 			user.faint();
 			if (user.return_pokemon(0).is_fainted() && user.return_pokemon(1).is_fainted() && user.return_pokemon(2).is_fainted()) {
 				cout << "You have been defeated!\n";
