@@ -37,7 +37,7 @@ int Trainer::show_revive() {
 string Trainer::show_pokemon(int in_num) {
 	return party[in_num].show_name();
 }
-int Trainer::show_pokemon_type(int in_num) {
+string Trainer::show_pokemon_type(int in_num) {
 	return party[in_num].show_type();
 }
 int Trainer::show_pokemon_hp(int in_num) {

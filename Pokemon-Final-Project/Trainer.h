@@ -22,24 +22,20 @@ public:
 	int show_elixir();
 	int show_revive();
 	Pokemon show_active_pokemon();
+	string show_pokemon(int in_num);
+	string show_pokemon_type(int in_num);
+	int show_pokemon_hp(int in_num);
+	int show_pokemon_pp(int in_num);
+	void new_pokemon(int party_member, Pokemon& pNew);
 	
 	// Battle methods
 	void print_moves();
 	void use_move(int move, Pokemon& enemy);
 	void use_potion(int party_member);
 	void use_elixir(int party_member);
-	string show_pokemon(int in_num);
-	int show_pokemon_type(int in_num);
-	int show_pokemon_hp(int in_num);
-	int show_pokemon_pp(int in_num);
-
 	void use_revive(int party_member);
+	void switch_active_pokemon();
+	void faint();
 
-	void new_pokemon(int party_member, Pokemon& pNew);
-
-	Pokemon show_active_pokemon();
-	//virtual void use_move();
-	// 
-	//virtual void switch_active_pokemon();
 };
 

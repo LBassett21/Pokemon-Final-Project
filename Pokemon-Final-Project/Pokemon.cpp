@@ -10,6 +10,7 @@ Pokemon::Pokemon(int in_name, int in_hp, int in_pp, int in_type, int move1, int 
 	type = in_type;
 	hp = in_hp;
 	pp = in_pp;
+	fainted = false;
 
 	max_hp = in_hp;
 	max_pp = in_pp;
@@ -58,10 +59,21 @@ int Pokemon::show_hp() {
 int Pokemon::show_pp() {
 	return pp;
 }
-int Pokemon::show_type() {
-	return type;
+string Pokemon::show_type() {
+	if (type == 1)
+		return "NORMAL";
+	else if (type == 2)
+		return "WATER";
+	else if (type == 3)
+		return "GRASS";
+	else if (type == 4)
+		return "GROUND";
+	else if (type == 5)
+		return "FIRE";
+	else 
+		return "ELECTRIC";
 }
 
-int Pokemon::show_move(int move_num) {
-	return moves[move_num];
+string Pokemon::show_move(int move_num) {
+	return move_name[move_num];
 }

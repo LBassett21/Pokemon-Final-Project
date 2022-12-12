@@ -422,25 +422,7 @@ int main() {
 				cout << "Your current pokemon are:\n";
 				for (int i = 0; i < 3; i++) {
 					cout << user->show_pokemon(i) << ": \n";
-					if (poke_data.poke_type[user->show_pokemon_type(i)] == NORMAL) {
-						typeString = "Normal";
-					}
-					else if (poke_data.poke_type[user->show_pokemon_type(i)] == WATER) {
-						typeString = "Water";
-					}
-					else if (poke_data.poke_type[user->show_pokemon_type(i)] == GRASS) {
-						typeString = "Grass";
-					}
-					else if (poke_data.poke_type[user->show_pokemon_type(i)] == GROUND) {
-						typeString = "Ground";
-					}
-					else if (poke_data.poke_type[user->show_pokemon_type(i)] == FIRE) {
-						typeString = "Fire";
-					}
-					else if (poke_data.poke_type[user->show_pokemon_type(i)] == ELECTRIC) {
-						typeString = "Electric";
-					}
-					cout << " Type: " << typeString << "\n";
+					cout << " Type: " << user->show_pokemon_type(i) << "\n";
 					cout << " Current HP: " << user->show_pokemon_hp(i) << "\n";
 					cout << " Current PP: " << user->show_pokemon_pp(i) << "\n";
 				}

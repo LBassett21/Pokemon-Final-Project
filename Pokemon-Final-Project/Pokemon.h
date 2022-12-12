@@ -11,6 +11,7 @@ class Pokemon
 	int type;
 	int weak_type;
 	int strong_type;
+	bool fainted;
 
 	int moves[4];
 	string move_name[4];
@@ -22,7 +23,6 @@ class Pokemon
 	int max_pp;
 
 	friend class Trainer;
-	//friend class User;
 
 public:
 	Pokemon();
@@ -32,9 +32,8 @@ public:
 
 	int show_hp();
 	int show_pp();
-	int show_type();
-
-	int show_move(int move_num);
+	string show_type();
+	string show_move(int move_num);
 
 };
 
