@@ -47,27 +47,35 @@ Pokemon* generate_pokemon() {
 }
 
 // Simulate entire fight, only break when one trainer is defeated
-void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
+void fightTrainer(User* user, Trainer& opponent, bool& userDefeated) {
 	bool opponentDefeated = false;
 	int choice = 0;
 	int move_choice = 0;
 	int item_choice = 0;
 	int poke_choice = 0;
+	int opponentMove;
+	Pokemon enemyPokemon = opponent.show_active_pokemon();
+	Pokemon userPokemon = user->show_active_pokemon();
+	
 	
 	cout << opponent.show_name() << " wants to fight!" << endl;
 	cout << opponent.show_name() << " sent out " << opponent.show_active_pokemon().show_name() << "!" << endl;
-	cout << "You sent out " << user.show_active_pokemon().show_name() << "!" << endl;
+	cout << "You sent out " << user->show_active_pokemon().show_name() << "!" << endl;
 	do {
 		cout << opponent.show_active_pokemon().show_name() << " - " << "HP: " << opponent.show_active_pokemon().show_hp() << " PP: " << opponent.show_active_pokemon().show_pp() << endl;
-		cout << user.show_active_pokemon().show_name() << " - " << "HP: " << user.show_active_pokemon().show_hp() << " PP: " << user.show_active_pokemon().show_pp() << endl;
+		cout << user->show_active_pokemon().show_name() << " - " << "HP: " << user->show_active_pokemon().show_hp() << " PP: " << user->show_active_pokemon().show_pp() << endl;
 
 		cout << "What will you do?" << endl;
 		cout << "1. Fight\n" << "2. Bag\n" << "3. Pokemon\n";
 		cin >> choice;
 		switch (choice) {
 		case 1:
-			cout << "Moves:\n" << user.show_active_pokemon().show_move1() << endl << user.show_active_pokemon().show_move2()
-				<< endl << user.show_active_pokemon().show_move3() << endl << user.show_active_pokemon().show_move1() << endl;
+			user->print_moves();
+			cin >> move_choice;
+			while (move_choice < 1 || move_choice > 4) {
+				cout << "Invalid choice. Please try again." << endl;
+			}
+			user->use_move(move_choice, enemyPokemon);
 			break;
 		case 2:
 			break;
@@ -75,6 +83,25 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 			break;
 		default:
 			cout << "Invalid option. Try again.\n";
+			break;
+		}
+
+		
+		if (opponent.show_active_pokemon().show_hp() <= 0) {
+
+		}
+		// Opponent (AI) move
+		opponentMove = (rand() % 3) + 1;		// Pick either option 1, 2, or 3
+		switch (opponentMove) {
+		case 1:
+			opponentMove = (rand() % 4) + 1;	// Pick move 1, 2, 3, or 4
+			opponent.use_move(opponentMove, userPokemon);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		default:
 			break;
 		}
 	} while (!userDefeated && !opponentDefeated);
@@ -295,13 +322,13 @@ int main() {
 		else if (userinput == 2) {
 			switch (level) {
 			case 1:
-				fightTrainer(*user, *opponent1, userDefeated);
+				fightTrainer(user, *opponent1, userDefeated);
 				break;
 			case 2:
-				fightTrainer(*user, *opponent2, userDefeated);
+				fightTrainer(user, *opponent2, userDefeated);
 				break;
 			case 3:
-				fightTrainer(*user, *opponent3, userDefeated);
+				fightTrainer(user, *opponent3, userDefeated);
 				break;
 			}
 
