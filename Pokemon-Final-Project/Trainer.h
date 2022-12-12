@@ -33,12 +33,6 @@ public:
 	int show_pokemon_hp(int in_num);
 	int show_pokemon_pp(int in_num);
 
-
-	// TODO: create methods to show attributes of each Pokemon
-
-	// TODO: create methods for using moves / other menu options
-	void use_potion();
-	void use_elixir();
 	void use_revive(int party_member);
 
 	void new_pokemon(int party_member, Pokemon& pNew);
