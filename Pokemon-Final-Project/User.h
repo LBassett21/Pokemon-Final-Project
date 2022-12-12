@@ -17,6 +17,7 @@ public:
     int show_pokeball();
 	int show_balance();
 
+	void add_balance(int in_bal);
 	void buy_pokeball(int in_num);
 	void buy_potion(int in_num);
 	void buy_elixir(int in_num);

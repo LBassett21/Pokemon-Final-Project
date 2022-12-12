@@ -117,6 +117,7 @@ void fightTrainer(User& user, Trainer& opponent, bool& userDefeated) {
 			opponent.faint();
 			if (opponent.return_pokemon(0).is_fainted() && opponent.return_pokemon(1).is_fainted() && opponent.return_pokemon(2).is_fainted()) {
 				cout << "You defeated " << opponent.show_name() << "!\n";
+				user.add_balance(1000);
 				opponentDefeated = true;
 				break;
 			}

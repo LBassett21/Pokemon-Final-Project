@@ -30,6 +30,11 @@ int User::show_balance() {
 	return balance;
 }
 
+void User::add_balance(int in_bal) {
+	balance = balance + 1000;
+	cout << "You added $1000 to your balance!\n";
+}
+
 void User::buy_pokeball(int in_num) {
 	num_pokeball += (1 * in_num);
 	balance = balance - (200 * in_num);
@@ -158,7 +163,7 @@ void User::switch_active_pokemon() {
 			}
 		}
 		cin >> choice;
-		while ((choice != (partyChoice[0] - 1)) && (choice != (partyChoice[1] - 1))) {
+		while ((choice != (partyChoice[0]+1)) && (choice != (partyChoice[1]+1))) {
 			cout << "Invalid option. Please try again.\n";
 			cin >> choice;
 		}
