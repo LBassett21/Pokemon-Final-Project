@@ -23,6 +23,7 @@ class Pokemon
 	int max_pp;
 
 	friend class Trainer;
+	friend class User;
 
 public:
 	Pokemon();
@@ -34,6 +35,7 @@ public:
 	int show_pp();
 	string show_type();
 	string show_move(int move_num);
+	bool is_fainted();
 
 };
 

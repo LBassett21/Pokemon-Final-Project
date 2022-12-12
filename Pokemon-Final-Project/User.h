@@ -23,5 +23,7 @@ public:
 	void buy_revive(int in_num);
 
 	void use_pokeball();
+	
+	void faint();
 };
 
