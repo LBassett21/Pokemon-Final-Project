@@ -23,7 +23,10 @@ public:
 	void buy_revive(int in_num);
 
 	void use_pokeball();
-	
+	void use_potion();
+	void use_elixir();
+	void use_revive();
+
 	void switch_active_pokemon();
 };
 
